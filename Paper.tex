@@ -1,0 +1,224 @@
+%\documentclass[journal,onecolumn,draftclsnofoot,a4paper]{IEEEtran}
+%\usepackage{ENDFLOAT2}
+%\notablist
+%\nofiglist
+\documentclass[journal,a4paper,twocolumn]{IEEEtran}
+%\documentclass[journal,twocolumn]{article}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{cite}
+\usepackage{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[colorlinks]{hyperref}
+%     %hypertexnames=true,
+
+\hypersetup{
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=teal,
+    citecolor=magenta
+    }
+\usepackage{breakurl}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+%\makeatletter
+%\renewcommand{\ALG@name}{Proposed Protocol}
+%\makeatother
+%\newcommand{\Lang}[1]{\{\mathtt{#1}\}}
+%\usepackage{letltxmacro}
+
+%\let\oldappendix\appendix\renewcommand{\appendix}{\textcolor{violet}{\oldappendix}} % \textsf{\textbf
+
+%\let\oldsection\section\renewcommand{\section}[1]{\textcolor{violet}{\oldsection{#1}}} % \textsf{\textbf
+
+%\let\oldsubsection\subsection\renewcommand{\subsection}[1]{\textcolor{teal}{\oldsubsection{#1}}}
+              
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\let\proof\relax \let\endproof\relax
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{result}{Result}
+
+\newcommand{\myresultbox}[1]{\begin{center}
+\noindent
+%\fbox{%
+\parbox{0.85\columnwidth}{%
+\begin{result}
+\textit{#1}
+\end{result}
+%}
+}\end{center}}
+
+\newcommand{\mypropositionbox}[1]{\begin{center}
+\noindent
+\fbox{%
+\parbox{0.85\columnwidth}{%
+\textbf{Proposition:}
+\textit{#1}
+}
+}\end{center}}
+
+
+%\newtheorem{proposedstrategy}{Proposed Protocol}
+
+\let\labelindent\relax
+\usepackage{enumitem}
+\usepackage{bm} 
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[]{vaucanson-g}
+\newcommand{\Lang}[1]{\{\mathtt{#1}\}}
+\newcommand{\blank}{\mbox{}\hrulefill}
+\newcommand{\Lpair}[2]{(\mathtt{#1}, \mathtt{#2})}
+
+\DeclareMathOperator{\Tr}{tr}
+\DeclareMathOperator{\Proj}{\bm{\mathsf{Proj}}}
+\DeclareMathOperator{\Diag}{\bm{\mathsf{diag}}}
+\DeclareMathOperator{\BlockDiag}{\bm{\mathsf{blkdiag}}}
+\DeclareMathOperator*{\argmax}{\arg\!\min}\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+%\renewcommand{\familydefault}{\sfdefault}
+%%\usepackage{arev}
+%\usepackage{cmbright}
+%\definecolor{schrift}{RGB}{0,73,114}
+%\usepackage{titlesec}
+%\titleformat{\section}
+%{\color{schrift}\large\bfseries}
+%{\color{schrift}\thesection}{1em}{}
+%{\color{schrift}\bfseries}
+%{\color{schrift}\thesection}{1em}{}
+
+%//////////////////////////////////////////////////////////////////////////////////////////////
+\begin{document}
+
+%\nocite{*} % This is to enable cross referencing 
+
+%//////////////////////////////////////////////////////////////////////////////////////////////
+%\title{Nonstationary Component Analysis of Temporally Correlated Signals; A Kalman Filter Approach}
+%\title{Nonstationary Component Analysis of Temporally Correlated Signals; Application to Fetal Electrocardiogram Extraction}
+\title{Mathematical Modeling of Lockdown Effect}
+%\title{Nonstationary Component Analysis for Fetal Electrocardiogram Extraction}
+%//////////////////////////////////////////////////////////////////////////////////////////////
+\author{Reza~Sameni$^\textnormal{*}$\\Grenoble, France\\%
+19 June 2020%
+%\thanks{Manuscript received February XX, 2019; revised YY, 2019. \textit{Asterisk indicates corresponding author.}}%
+\thanks{$^\textnormal{*}$R. Sameni is Associate Professor of Biomedical Engineering at School of Electrical \& Computer Engineering, Shiraz University, Shiraz, Iran, currently on sabbatical leave as a visiting researcher at GIPSA-lab, Universit\'e Grenoble Alpes, CNRS, Grenoble INP, 38000 Grenoble, France and a member of the 
+SEEPIA (Simulation \& Estimation of Epidemics with Algorithms) project working group (e-mail: \url{reza.sameni@gmail.com}).}%
+%\thanks{Copyright (c) 2019 IEEE. Personal use of this material is permitted.  However, permission to use this material for any other purposes must be obtained from the IEEE by sending an email to pubs-permissions@ieee.org.}%
+}%\newline
+%//////////////////////////////////////////////////////////////////////////////////////////////
+\markboth{}{}
+%\pubid{0000--0000/00\$00.00~\copyright~2007 IEEE}
+\maketitle
+%//////////////////////////////////////////////////////////////////////////////////////////////
+%\begin{abstract}
+%\textcolor{red}{Model healthcare system capacity saturation (healthcare system break-point).}
+%\textcolor{red}{Economic break-point.}
+%The outbreak of the Coronavirus COVID-19 has taken the lives of several thousands worldwide and locked-out many countries and regions, with yet unpredictable global consequences. In this research we study the epidemic patterns of this virus, from a mathematical modeling perspective. % based on public available data
+%The study is based on an extensions of the well-known \textit{susceptible-infected-recovered (SIR)} family of compartmental models. It is shown how social measures such as distancing, regional lockdowns, quarantine and global public health vigilance, influence the model parameters, which can eventually change the mortality rates and active contaminated cases over time, in the real world. As with all mathematical models, the predictive ability of the model is limited by the accuracy of the available data and to the so-called \textit{level of abstraction} used for modeling the problem. In order to provide the broader audience of researchers a better understanding of spreading patterns of epidemic diseases, a short introduction on biological systems modeling is also presented and the Matlab source codes for the simulations are provided online.
+%\end{abstract}
+%//////////////////////////////////////////////////////////////////////////////////////////////
+%\begin{keywords}
+%Nonlinear least squares; Gaussian mixture models; time-frequency optimization; Fourier transform.
+%\end{keywords}
+%//////////////////////////////////////////////////////////////////////////////////////////////
+\IEEEpeerreviewmaketitle
+%//////////////////////////////////////////////////////////////////////////////////////////////
+\section{Introduction
+\label{sec:introduction}}
+A basic model used for modeling epidemic diseases without lifetime immunity is known as the \textit{susceptible-infected-recovered (SIR)} model \cite{anderson1979population,may1979population,brauer2012mathematical}. In this model, the total population of $N$ individuals exposed to an epidemic disease at each time instant $t$ is divided into three groups (each represented by a compartment): the susceptible group fraction denoted by $s(t)$, the infected group fraction denoted by $i(t)$, and the recovered group fraction denoted by $r(t)$ (the compartment variables are in fact the fraction of each group's population divided by $N$). Accordingly, the system is closed and we have
+\begin{equation}
+ s(t)+i(t)+r(t) = 1
+ \label{eq:sirpopulation}
+\end{equation}
+A compartmental model for the propagation of the disease is shown in Fig.~\ref{fig:sir}. 
+\begin{figure}[b]
+% Susceptible/Infected/Recovered Model2
+\MediumPicture\VCDraw{%
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[s]{(0,0)}{A} \State[i]{(3,0)}{B} \State[r]{(6,0)}{C}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeR{B}{C}{\beta}
+\EdgeR{A}{B}{\alpha i}
+\LArcR{C}{A}{\gamma}
+\end{VCPicture} 
+}
+\caption{The basic susceptible-infected-recovered (SIR) model}
+\label{fig:sir}
+\end{figure}
+The compartmental representation of Fig.~\ref{fig:sir} is equivalent to the following set of differential equations:
+\begin{equation}
+\begin{aligned}
+ &\frac{ds(t)}{dt}=-\alpha s(t)i(t) +\gamma r(t)\\
+ &\frac{di(t)}{dt}= \alpha s(t) i(t) - \beta i(t)\\
+ &\frac{dr(t)}{dt}= \beta i(t) -\gamma r(t)
+ \end{aligned}
+\label{eq:SIRequation}
+\end{equation}
+Accordingly, moving from the susceptible group to the infected group takes place at a rate that is proportional to the population of the infected and susceptible groups, with parameter $\alpha$. At the same time, infected individuals are assumed to recover at a constant rate of $\beta$. Finally, considering that the disease is not assumed to result in lifetime immunity of the subjects, the recovered individuals again return to the susceptible group at a fixed rate of $\gamma$. From (\ref{eq:SIRequation}), it is evident that 
+\begin{equation}
+\frac{ds(t)}{dt}+\frac{di(t)}{dt}+\frac{dr(t)}{dt}=0
+\end{equation}
+which is in accordance with (\ref{eq:sirpopulation}) and the fact that the system is assumed to be closed (no births or deaths have been considered).
+
+In practice, due to social restrictions such as quarantine and lockdowns, the model parameters are all functions of time. In the sequel we present methods for modeling such effects.
+
+\section{Gradual lockdown and reopening}
+The social behavior due to lockdown and reopening does not have an instantaneous effect and depending on the applied policy it can happen with a gradual slope. In this case, one may for example assume that the infection rate $\alpha$ is a function of time. Supposing that it varies between two values $\alpha_0$ (infection rate when no lockdown is imposed) and $\alpha_1$ (maximum infection rate when maximum social lockdown is imposed), then $\alpha(t)$ can be modeled as
+\begin{equation}
+    \begin{array}{l}
+    \beta(t) = (\alpha_1 - \alpha_0) x(t - t_0) + \alpha_0
+    \end{array}
+\end{equation}
+where $t_0$ is the time of lockdown imposure and $x(t)$ can be for example the Sigmoid function
+\begin{equation}
+    x(t) = \frac{1}{2}[1 + \tanh{(\sigma t)}] = \frac{1}{1 + e^{-\sigma t}} 
+\end{equation}
+which monotonically increases from 0 to 1 from $t = -\infty$ to $t = \infty$, with $x(t_0) = 0.5$. The parameter $\sigma > 0$ defines the slope of the saturation effect: the higher its value, the steeper the effect of lockdown or reopening.
+
+For dynamic modeling applications, it is insightful to recall that the Hyperbolic Tangent function $y(t) = \tanh[\sigma (t - t_0)]$ is the solution of the nonlinear dynamic equation:
+\begin{equation}
+    \dot{y}(t) = \sigma [1 - y(t)^2], \quad y(t_0) = 0
+\end{equation}
+or equivalently
+\begin{equation}
+    y(t)\dot{y}(t) +\frac{1}{2\sigma}\ddot{y}(t) = 0, \quad y(t_0) = 0,\quad\dot{y}(t_0) = \sigma
+\end{equation}
+For model fitting applications, either of the above equations can be state-augmented with the model equations in (\ref{eq:SIRequation}) and used throughout the system model propagation.
+
+\section{Healthcare system saturation}
+\label{sec:healthcaresaturation}
+Another scenario corresponds to the case where the healthcare system reaches its maximum capacity or break-point, due to limited test kits, medication, hospitalization, excessive fatigue or mortality of the healthcare personnel, economic breakdowns, etc. This phenomenon is the worst feared case for pandemic strategists and it can be modeled at various levels. 
+
+Suppose that we consider the mortal SEIR model proposed in \cite{sameni2020mathematical} and model the healthcare system saturation in its simplest form and assume that the recovery and mortality rates of the model change as functions of the number of infected cases:
+\begin{equation}
+    \begin{array}{l}
+    \beta(t) = (\beta_s - \beta_0) h(i(t)) + \beta_0\\
+    \mu(t) = (\mu_s - \mu_0) h(i(t)) + \mu_0    
+    \end{array}
+\end{equation}
+where $\beta_0$ and $\mu_0$ are the recovery and mortality rate parameters before healthcare system saturation, $\beta_s$ ($\beta_s \ll \beta_0$) and $\mu_s$ ($\mu_s \gg \mu_0$) are the recovery and mortality rates after saturation, and $h(i(t))$ is a saturation function such that $h(0) \approx 0$ and $h(\infty) \approx 1$. For example, the Sigmoid function with a slope parameter $\sigma$ is a reasonable and common choice for modeling such phenomena:
+\begin{equation}
+    h(i) = \frac{1}{2}\{1 + \tanh{[\sigma(i - i_0)]}\} 
+\end{equation}
+where $i_0$ is the infection break-point of the healthcare system. The above choice is also beneficial for parameter optimization and tracking, due to the smoothness and differentiability of the hyperbolic tangent function. A simulation of this scenario was presented in \cite{sameni2020mathematical}.
+
+
+
+%/////////////////////////////////////////////////////////////////////////////////////////////////////////
+%\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,References}
+%\newpage
+%\listoffigures
+%\listoftables
+\end{document}

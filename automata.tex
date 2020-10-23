@@ -1,0 +1,427 @@
+%%%\documentclass[a4paper,11pt]{article}
+%%%\usepackage{pstricks, pst-node}
+%%%\psset{arrows=->, labelsep=3pt, mnode=circle}
+%%%\begin{document}
+%%%  \begin{psmatrix}[rowsep=20pt, colsep=28pt]
+%%%    A & B \\
+%%%    $\sqrt{\frac{x+y}{z}}$ & D
+%%%    \psset{linestyle=dotted}
+%%%    \ncline{1, 1}{1, 2}\naput{\emph{firstly}}
+%%%    \ncline{1, 2}{2, 2}\naput{\emph{next}}
+%%%    \ncline{2, 2}{2, 1}\naput{\emph{then}}
+%%%    \ncline{2, 1}{1, 1}\naput{\emph{last}}
+%%%    \nccurve[ncurv=2, 
+%%%      linestyle=solid, angleA=90]{1, 1}{2, 2}      
+%%%  \end{psmatrix}  
+%%%\end{document}
+\documentclass[a4paper,11pt]{article}
+
+%\usepackage[T1]{fontenc}
+%%\usepackage[scaled]{uarial}
+%\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+\usepackage[]{vaucanson-g}
+%\usepackage[]{vaucanson}
+
+\newcommand{\Lang}[1]{\{\mathtt{#1}\}}
+\newcommand{\blank}{\mbox{}\hrulefill}
+\newcommand{\Lpair}[2]{(\mathtt{#1}, \mathtt{#2})}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\section{Automata Basics}
+
+\subsection{Basic commands}
+
+This is your first LaTeX automata script, starting with the simple commands!
+
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[N]{(0,0)}{A} \State[A]{(4,0)}{B}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\ArcL{A}{B}{p_{12}} \ArcL{B}{A}{p_{21}}
+\LoopN{A}{p_{11}} \LoopN{B}{p_{22}}
+\end{VCPicture} 
+
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[N]{(0,0)}{A} \State[A]{(6,0)}{B} \State[V]{(3,-5)}{C}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\ArcL{A}{B}{p_{12}} \ArcL{B}{A}{p_{21}}
+\ArcL{B}{C}{p_{23}} \ArcL{C}{B}{p_{32}}
+\ArcL{A}{C}{p_{13}} \ArcL{C}{A}{p_{31}}
+\LoopW{A}{p_{11}}
+\LoopE{B}{p_{22}}
+\LoopS{C}{p_{33}}
+\end{VCPicture} 
+\vspace{2in}
+
+% Susceptible/Infected Model
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[S]{(0,0)}{A} \State[I]{(3,0)}{B}
+\EdgeL{A}{B}{\alpha I}
+\end{VCPicture} 
+\vspace{.2in}
+
+% Susceptible/Infected/Susceptible Model
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[S]{(0,0)}{A} \State[I]{(3,0)}{B}
+\ArcL{A}{B}{\alpha I}
+\ArcL{B}{A}{\gamma}
+\end{VCPicture} 
+\vspace{.2in}
+
+% Susceptible/Infected/Recovered Model
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[S]{(0,0)}{A} \State[I]{(3,0)}{B} \State[R]{(6,0)}{C}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{B}{C}{\beta}
+\EdgeL{A}{B}{\alpha I}
+\end{VCPicture} 
+\vspace{.2in}
+
+% Susceptible/Infected/Recovered Model2
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[S]{(0,0)}{A} \State[I]{(3,0)}{B} \State[R]{(6,0)}{C}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{B}{C}{\beta}
+\EdgeL{A}{B}{\alpha I}
+\LArcL{C}{A}{\gamma}
+\end{VCPicture} 
+\vspace{.2in}
+
+% Susceptible/Infected/Recovered Model3
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\HideState
+\State[0]{(-1.5,1.5)}{A0} \State[1]{(0,-2)}{A1} \State[2]{(3,-2)}{B1} \State[3]{(6,-2)}{C1}
+\ShowState
+\State[S]{(0,0)}{A} \State[I]{(3,0)}{B} \State[R]{(6,0)}{C}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{B}{C}{\beta}
+\EdgeL{A}{B}{\alpha I}
+\LArcR{C}{A}{\gamma}
+\EdgeL{A0}{A}{\mu^*}
+\EdgeL{A}{A1}{\mu_s}
+\EdgeL{B}{B1}{\mu_i}
+\EdgeL{C}{C1}{\mu_r}
+\end{VCPicture} 
+\vspace{.2in}
+
+% Susceptible/Exposed/Infected/Recovered Model3
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\HideState
+\State[0]{(-1.5,1.5)}{A0} \State[1]{(0,-2)}{A1} \State[2]{(3,-2)}{B1} \State[3]{(6,-2)}{C1} \State[4]{(9,-2)}{D1}
+\ShowState
+\State[S]{(0,0)}{A} \FinalState[E]{(3,0)}{B} \State[I]{(6,0)}{C} \State[R]{(9,0)}{D}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{C}{D}{\beta}
+\EdgeL{B}{C}{\epsilon}
+\EdgeL{A}{B}{\alpha I}
+\LArcR{D}{A}{\gamma}
+\EdgeL{A0}{A}{\mu^*}
+\EdgeL{A}{A1}{\mu_s}
+\EdgeL{B}{B1}{\mu_e}
+\EdgeL{C}{C1}{\mu_i}
+\EdgeL{D}{D1}{\mu_r}
+\end{VCPicture} 
+\vspace{.2in}
+
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\HideState
+\State[0]{(0,0)}{X} \State[1]{(12,0)}{Y}
+\ShowState
+\State[x]{(3,0)}{A} \State[y]{(6,-2)}{B} \State[z]{(9,0)}{C}
+% initial--final
+%\Initial{A} \Final{C}
+% transitions
+\EdgeL{X}{A}{\lambda}
+\EdgeL{A}{B}{\alpha}
+\EdgeL{B}{C}{\beta}
+\ArcL{A}{C}{\gamma x}
+\EdgeL{C}{Y}{\rho}
+\end{VCPicture} 
+\vspace{2in}
+
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\ShowState
+\State[S]{(3,0)}{A} \State[C]{(6,0)}{B} \State[P]{(9,0)}{C}
+% initial--final
+%\Initial{A} \Final{C}
+% transitions
+\ArcL{A}{B}{k_1 e}
+\EdgeL{B}{C}{k_3}
+\ArcL{B}{A}{k_2}
+\end{VCPicture} 
+\vspace{2in}
+
+\begin{VCPicture}{(-4,-2)(6,2)}
+% states
+\State[p]{(0,0)}{A} \State{(3,0)}{B} \State[r]{(6,0)}{C}
+% initial--final
+\Initial{A} \Final{C}
+% transitions
+\EdgeL{A}{B}{a} \ArcL{B}{C}{b} \ArcL{C}{B}{b}
+\LoopN{A}{a} \LoopS{C}{d}
+\end{VCPicture} 
+
+
+
+\subsection{Final State commands}
+\begin{VCPicture}{(-4,-2)(6,2)}
+
+% states
+\State[p]{(0,1)}{A} \State{(2,-1)}{B} \State[r]{(4,1)}{C}
+\FinalState[r]{(6,-1)}{D}
+% initial--final
+\Initial{A} \Final{A}
+\Initial[ne]{B} \Initial[nw]{B}
+\Initial[se]{B} \Initial[sw]{B}
+\Initial{C} \Final[w]{C} 
+\Initial[n]{D} \Final[s]{D}
+
+\end{VCPicture}%
+
+\subsection{Edge commands}
+\begin{VCPicture}{(-4,-2)(6,3)}
+
+% states   
+\State[A]{(0,0)}{A} \State[B]{(2,-2)}{B} \State[C]{(4,2)}{C}
+\State[D]{(6,0)}{D}
+% transitions
+\EdgeR{A}{B}{a} \EdgeL{A}{C}{b} \EdgeR{B}{D}{c}
+\EdgeL{C}{D}{d} \EdgeL{C}{B}{} \EdgeL[.3]{A}{D}{x}
+
+\end{VCPicture}
+
+
+\subsection{Arc commands}
+\begin{VCPicture}{(-4,-2)(6,2)}
+
+% states
+\State[A]{(0,0)}{A} \State[B]{(2,-2)}{B} \State[C]{(4,2)}{C}
+\State[D]{(6,0)}{D}
+   
+%initial-final
+\Initial{A} \Final[s]{B} \Final[n]{C}
+    
+% transitions
+\ArcR{A}{B}{a} \ArcL{A}{C}{b} \LArcR{B}{D}{c} \LArcL{C}{D}{d}
+\ArcL{A}{B}{a'} \EdgeR{A}{C}{b'} \EdgeL{B}{D}{c'}
+\LArcR{C}{D}{d'}
+     
+\end{VCPicture}
+
+
+\subsection{Loop commands}
+\begin{VCPicture}{(-3,-3)(4,3)}
+ 
+% states
+\State[A]{(0,0)}{A}       
+\State[D]{(6,0)}{D}
+
+% transitions
+\LoopE{A}{e} \LoopW{A}{w} \LoopS{A}{s} \LoopN[.5]{A}{n}
+\CLoopE{D}{e} \CLoopW{D}{w} \CLoopS{D}{s} \CLoopN[.5]{D}{n}
+         
+\end{VCPicture}
+
+
+
+\subsection{A Nice Example}
+\begin{VCPicture}{(-3,-2)(6,2)}
+
+% states    
+\State[i]{(0,0)}{A} \State[q]{(3,0)}{B} \State[t]{(6,0)}{C}
+
+% initial-final
+\Initial{A} \Final{C}
+
+% transitions
+\EdgeR{A}{B}{2b} \EdgeR{B}{C}{2b} \LArcL{A}{C}{b}
+\LoopN{A}{a} \LoopS{A}{b} \LoopS[.5]{B}{2a+2b}
+\LoopN[.75]{C}{4a} \LoopS[.75]{C}{4b}
+                   
+\end{VCPicture}
+
+
+\subsection{Reverse Transitions}
+\begin{VCPicture}{(-3,-2)(6,3)}
+               
+% states
+\State[A]{(0,0)}{A} \State[B]{(2,-2)}{B} \State[C]{(4,2)}{C}
+\State[D]{(6,0)}{D}
+
+% transitions
+\Final[s]{B}
+\ArcR{A}{B}{a} \ArcL{A}{C}{b} \LArcR{B}{D}{c} \LArcL{C}{D}{d}
+   
+\ReverseArrow
+\Initial{A} \Final[n]{C}
+\ArcL{A}{B}{a'} \EdgeR{A}{C}{b'} \EdgeL{B}{D}{c'}
+\LArcR{C}{D}{d'}
+\end{VCPicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{VCPicture}{(0,0)(6,2)}
+% states
+\HideState
+\State[3]{(6,-2)}{C1}
+\ShowState
+\State[s]{(3,2)}{A}
+\State[e]{(3,0)}{B}
+\State[i]{(6,0)}{C}
+\State[r]{(9,0)}{D}
+\State[p]{(9,-2)}{D1}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+%\EdgeL{C}{D}{\beta}
+%\EdgeL{B}{C}{\kappa}
+%\LArcL{B}{D}{\rho}
+%\EdgeR{A}{B}{\alpha_e e + \alpha_i i}
+%\LArcR{D}{A}{\gamma}
+%\EdgeR{C}{D1}{\mu}
+\end{VCPicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{VCPicture}{(0,0)(6,2)}
+% states
+\HideState
+\State[3]{(6,-2)}{C1}
+\ShowState
+\State[s]{(3,2)}{A}
+\State[e]{(3,0)}{B}
+\State[i]{(6,0)}{C}
+\State[r]{(9,0)}{D}
+\State[p]{(9,-2)}{D1}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+%\EdgeL{C}{D}{\beta}
+%\EdgeL{B}{C}{\kappa}
+%\LArcL{B}{D}{\rho}
+\EdgeR{A}{B}{\alpha_e e + \alpha_i i}
+%\LArcR{D}{A}{\gamma}
+%\EdgeR{C}{D1}{\mu}
+\end{VCPicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{VCPicture}{(0,0)(6,2)}
+% states
+\HideState
+\State[3]{(6,-2)}{C1}
+\ShowState
+\State[s]{(3,2)}{A}
+\State[e]{(3,0)}{B}
+\State[i]{(6,0)}{C}
+\State[r]{(9,0)}{D}
+\State[p]{(9,-2)}{D1}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+%\EdgeL{C}{D}{\beta}
+\EdgeL{B}{C}{\kappa}
+\LArcL{B}{D}{\rho}
+\EdgeR{A}{B}{\alpha_e e + \alpha_i i}
+%\LArcR{D}{A}{\gamma}
+%\EdgeR{C}{D1}{\mu}
+\end{VCPicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{VCPicture}{(0,0)(6,2)}
+% states
+\HideState
+\State[3]{(6,-2)}{C1}
+\ShowState
+\State[s]{(3,2)}{A}
+\State[e]{(3,0)}{B}
+\State[i]{(6,0)}{C}
+\State[r]{(9,0)}{D}
+\State[p]{(9,-2)}{D1}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{C}{D}{\beta}
+\EdgeL{B}{C}{\kappa}
+\LArcL{B}{D}{\rho}
+\EdgeR{A}{B}{\alpha_e e + \alpha_i i}
+%\LArcR{D}{A}{\gamma}
+\EdgeR{C}{D1}{\mu}
+\end{VCPicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{VCPicture}{(0,0)(6,2)}
+% states
+\HideState
+\State[3]{(6,-2)}{C1}
+\ShowState
+\State[s]{(3,2)}{A}
+\State[e]{(3,0)}{B}
+\State[i]{(6,0)}{C}
+\State[r]{(9,0)}{D}
+\State[p]{(9,-2)}{D1}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{C}{D}{\beta}
+\EdgeL{B}{C}{\kappa}
+\LArcL{B}{D}{\rho}
+\EdgeR{A}{B}{\alpha_e e + \alpha_i i}
+\LArcR{D}{A}{\gamma}
+\EdgeR{C}{D1}{\mu}
+\end{VCPicture}
+
+
+\newpage
+\MediumPicture\VCDraw{%
+\begin{VCPicture}{(-2,-3)(6,2)}
+% states
+\ShowState
+\LargeState\State[S]{(-2,0)}{A}
+\State[A]{(4,0)}{B}
+\State[I]{(7,0)}{C}
+\State[P]{(10,0)}{D}
+\State[R_A]{(4,2)}{E}
+\State[R_I]{(7,-2)}{F}
+% initial--final
+%\Initial{A} \Final{B}
+% transitions
+\EdgeL{C}{F}{\delta_I}
+\EdgeL{B}{C}{\nu}
+\EdgeL{B}{E}{\delta_A}
+\EdgeR{A}{B}{\beta_A A + \beta_I I}
+\LArcR{E}{A}{\gamma_A}
+\LArcL{F}{A}{\gamma_I}
+\EdgeL{C}{D}{\alpha}
+\end{VCPicture}}
+
+\end{document}
+
+
